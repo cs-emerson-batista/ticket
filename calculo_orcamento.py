@@ -25,34 +25,25 @@ def salvar_saldo(saldo_atual, valor):
 	escrita_arquivo_novo_saldo.write(str(calculo))
 	escrita_arquivo_novo_saldo.close()
 
-escolha_do_usuario = input('(n)ovo gasto / (s)aldo ')
+def novo_deposito(deposito):
+	novo_saldo = saldo_atual() + deposito
+	escrita_arquivo_novo_saldo = open("saldo_atual.txt", "w")
+	escrita_arquivo_novo_saldo.write(str(novo_saldo))
+	escrita_arquivo_novo_saldo.close()
+
+escolha_do_usuario = input('(n)ovo gasto / (s)aldo / (d)eposito ')
 if escolha_do_usuario == 'n':
 	valor_saldo_atual = saldo_atual()
-	valor_do_debito = float(input('Qual o valor gasto: '))
+	valor_do_debito = float(input('Qual o valor gasto? '))
 	salvar_saldo(valor_saldo_atual, valor_do_debito)
-	print('novo saldo %.2f' % saldo_atual())
+	print('Novo saldo %.2f' % saldo_atual())
 elif escolha_do_usuario == 's':
-	print('saldo atual: %.2f' % saldo_atual())
-	print('seu ticket médio é: %.2f' % ticket_medio())
+	print('Saldo atual: %.2f' % saldo_atual())
+	print('Seu ticket médio é: %.2f' % ticket_medio())
 elif escolha_do_usuario == 'd':
-	print('deposito')
+	depositado = float(input('Qual o valor depositado? '))
+	novo_deposito(depositado)
+	print('Seu novo saldo é: %.2f' % saldo_atual())
+	print('Seu ticket médio agora é: %.2f' % ticket_medio())
 else:
-	print('sorry, try again: s, n ' )
-
-
-
-
-# monthrange(2017, 5)[1] - datetime.now().day
-
-# Open the file for reading
-# read_file = open("text.txt", "r")
-
-# Use a second file handler to open the file for writing
-# write_file = open("text.txt", "w")
-# Write to the file
-# # write_file.write("Not closing files is VERY BAD.")
-
-# # Try to read from the file
-# print read_file.read()
-# write_file.close()
-# read_file.close()
+	print('sorry, try again: s, n ou d')
